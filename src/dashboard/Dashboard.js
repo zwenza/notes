@@ -5,9 +5,8 @@ import './Dashboard.scss';
 export default class Dashboard extends React.Component {
     render() {
         return (
-            <div className="test">
-                <h2>Dashboard!</h2>
-                <p>Test</p>
+            <div className="container">
+                <h2>Calendar TODO</h2>
                 <Note />
             </div>
         );
