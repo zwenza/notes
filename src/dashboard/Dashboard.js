@@ -5,38 +5,32 @@ import moment from 'moment';
 import './Dashboard.scss';
 
 export default class Dashboard extends React.Component {
-    state = {
-        datePickerActive: false,
-        selectedDate: undefined
-    }
+  state = {
+    focused: false,
+    selectedDate: moment()
+  };
 
-    render() {
-        return (
-            <div className="container">
-                <div className="header">
-                    <SingleDatePicker
-                        date={moment()}
-                        onDateChange={date => {
-                            this.setState(state => {
-                                console.log('date changed');
-
-                                state.datePickerActive = false;
-                                state.selectedDate = date;
-                            })
-                        }}
-                        focused={this.state.datePickerActive}
-                        onFocusChange={({ focused }) => { console.log('focus'); this.setState(state => state.datePickerActive = !state.datePickerActive) }}
-                    />
-                </div>
-                <div className="content">
-                    <div>
-                        <h2>Metadata</h2>
-                        <br />
-                        <p>Created 10.03.2018</p>
-                    </div>
-                    <Note />
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="container">
+        <div className="header">
+          <SingleDatePicker
+            date={this.state.selectedDate}
+            onDateChange={date => this.setState({ selectedDate: date })}
+            focused={this.state.focused}
+            onFocusChange={({ focused }) => this.setState({ focused })}
+            showDefaultInputIcon
+          />
+        </div>
+        <div className="content">
+          <div>
+            <h2>Metadata</h2>
+            <br />
+            <p>Created 10.03.2018</p>
+          </div>
+          <Note />
+        </div>
+      </div>
+    );
+  }
 }
