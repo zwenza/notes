@@ -1,10 +1,17 @@
-import React from 'react';
+import * as React from 'react';
 import Note from '../note/Note';
 import { SingleDatePicker } from 'react-dates';
-import moment from 'moment';
+import { Moment } from 'moment';
+
+let moment = require('moment');
 import './Dashboard.scss';
 
-export default class Dashboard extends React.Component {
+interface State {
+  focused: boolean;
+  selectedDate: Moment;
+}
+
+export default class Dashboard extends React.Component<{}, State> {
   state = {
     focused: false,
     selectedDate: moment()
@@ -15,10 +22,13 @@ export default class Dashboard extends React.Component {
       <div className="container">
         <div className="header">
           <SingleDatePicker
+            id={'test'}
             date={this.state.selectedDate}
             onDateChange={date => this.setState({ selectedDate: date })}
             focused={this.state.focused}
-            onFocusChange={({ focused }) => this.setState({ focused })}
+            onFocusChange={(arg: { focused: boolean }) =>
+              this.setState({ focused: arg.focused })
+            }
             showDefaultInputIcon
           />
         </div>

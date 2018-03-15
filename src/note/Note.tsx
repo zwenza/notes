@@ -1,10 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
+import { AnyAction } from 'typescript-fsa';
 
-import { createNote } from './Note.ducks';
+import * as noteActions from './Note.ducks';
 import './Note.scss';
 
-class Note extends React.Component {
+interface Props {
+  onSaveClick: () => void;
+}
+
+class Note extends React.Component<Props, {}> {
   render() {
     return (
       <div className="container">
@@ -15,10 +20,10 @@ class Note extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: (action: AnyAction) => void) => {
   return {
     onSaveClick: () => {
-      dispatch(createNote('test'));
+      dispatch(noteActions.createNote('test'));
     }
   };
 };
